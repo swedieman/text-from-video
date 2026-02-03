@@ -30,6 +30,20 @@ body {
   margin: 0;
 }
 
+h2 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 6px 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 a {
   color: inherit;
   text-decoration: none;

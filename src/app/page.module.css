@@ -24,73 +24,75 @@
   max-width: 800px;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: start;
   background-color: var(--foreground);
   padding: 120px 60px;
 }
 
-.intro {
+.info {
+  width: 100%;
+  margin: 7px 0px;
+  min-height: 21px;
+}
+
+.error {
+  color: #b90303;
+}
+
+.videoLinkContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.videoLinkInput {
+  flex: 1;
+  border-radius: 8px;
+  border: 0;
+  padding: 0.6em 1.2em;
+  margin-right: 20px;
+}
+
+.textFileGrid {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
   width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+  border: 1px solid #757575;
+  border-radius: 3px;
+  padding: 5px;
 }
 
-.ctas a {
+.textFileGrid > div {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.textFileGrid > div > div {
+  margin: auto;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.textFileGrid > div:not(:first-of-type) {
+  padding-top: 4px;
+}
+
+.textFileGrid > div:not(:last-of-type) {
+  border-bottom: 1px solid #757575;
+  padding-bottom: 4px;
+}
+
+.textFileGrid > div > div:first-of-type {
+  margin: auto;
+  max-width: 408px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textFileGrid > div > div > button {
+  width: 107px;
+  height: 50px;
+  margin: 0 10px;
 }
 
 /* Enable hover only on non-touch devices */
@@ -106,21 +108,11 @@ a.secondary {
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+/* @media (max-width: 550px) {
+  .textFileGrid > div > div {
+    width: 480px;
   }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   .logo {
