@@ -69,5 +69,5 @@ ENV PORT 3001
 
 # Host name must be set below to work locally (by some reason). But it may not work on production environment since
 # they probably use a different IP range. Test without setting it for now.
-ENV HOSTNAME="172.17.0.2"
+# ENV HOSTNAME="172.17.0.2"
 CMD ["node", "server.js"]
