@@ -1,0 +1,3 @@
+We just put a file here so that Git will keep the/public folder.
+Otherwise docker build fails. There's nothing to put here now
+except perhaps a favicon.
