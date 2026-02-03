@@ -34,7 +34,10 @@ RUN npm run build
 FROM node:20-alpine AS runner
 
 # TODO: Check that we get latest version of yt-dlp. Otherwise we need to download latest stable with e.g. wget.
-RUN apk add --no-cache yt-dlp py3-send2trash py3-charset-normalizer
+RUN apk add --no-cache py3-send2trash py3-charset-normalizer
+
+RUN wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /bin/yt-dlp
+RUN chmod a+rx /bin/yt-dlp
 
 WORKDIR /app
 RUN apk upgrade --ignore alpine-baselayout
@@ -66,5 +69,5 @@ ENV PORT 3001
 
 # Host name must be set below to work locally (by some reason). But it may not work on production environment since
 # they probably use a different IP range. Test without setting it for now.
-# ENV HOSTNAME="172.17.0.2"
+ENV HOSTNAME="172.17.0.2"
 CMD ["node", "server.js"]
