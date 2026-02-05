@@ -55,6 +55,7 @@ COPY --from=builder /app/subtotxt.py ./subtotxt.py
 
 # Copy cookie file from environment, if found
 COPY --from=builder /app/cookies.txt* ./
+RUN chmod a+r /cookies.txt*
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
