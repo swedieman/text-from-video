@@ -6,7 +6,7 @@ const SUBS_TEXT_DIR = '/tmp/texts'; // Directory where thee cleaned up (text onl
 
 // To make yt-dlp work on production environment we need to pass cookie info exported from a logged YouTube/Google
 // account. The IP series used on most production env providers is semi-blocked by YouTube (to prevent scraping).
-const SECRET_YDL_COOKIE_FILE_PATH = '/ydl_cookies.txt';
+const SECRET_YDL_COOKIE_FILE_PATH = '/cookies.txt';
 
 const getSubTitlesFromVideo = async (url, useAutoSubs) => {
   const autoSubsStr = useAutoSubs ? ' --write-auto-subs' : '';
@@ -15,7 +15,7 @@ const getSubTitlesFromVideo = async (url, useAutoSubs) => {
   // Only include cookie arg if cookie file exists. yt-dlp works without cookie file locally and need to be set up
   // as a "secret file" on production server.
   const cookieFileExists = fs.existsSync(SECRET_YDL_COOKIE_FILE_PATH);
-  const cookieArg = cookieFileExists ? ` --cookies ${SECRET_YDL_COOKIE_FILE_PATH}` : '';
+  const cookieArg = cookieFileExists ? ` --cookies cookies.txt` : '';
 
   if (cookieFileExists) {
     console.log('YT cookie file found.');

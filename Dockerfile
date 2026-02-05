@@ -54,7 +54,7 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/subtotxt.py ./subtotxt.py
 
 # Copy cookie file from environment, if found
-COPY --from=builder /app/ydl_cookies.txt* ./
+COPY --from=builder /app/cookies.txt* ./
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
