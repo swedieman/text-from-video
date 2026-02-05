@@ -33,7 +33,6 @@ RUN npm run build
 # Production image, copy all the files and run next
 FROM node:20-alpine AS runner
 
-# TODO: Check that we get latest version of yt-dlp. Otherwise we need to download latest stable with e.g. wget.
 RUN apk add --no-cache py3-send2trash py3-charset-normalizer
 
 RUN wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /bin/yt-dlp
@@ -55,7 +54,8 @@ COPY --from=builder /app/subtotxt.py ./subtotxt.py
 
 # Copy cookie file from environment, if found
 COPY --from=builder /app/cookies.txt* ./
-RUN chmod a+r ./cookies.txt*
+RUN chmod a+r ./cookies.txt
+# RUN chmod a+r ./cookies.txt 2> /dev/null
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
