@@ -17,6 +17,12 @@ const getSubTitlesFromVideo = async (url, useAutoSubs) => {
   const cookieFileExists = fs.existsSync(SECRET_YDL_COOKIE_FILE_PATH);
   const cookieArg = cookieFileExists ? ` --cookies ${SECRET_YDL_COOKIE_FILE_PATH}` : '';
 
+  if (cookieFileExists) {
+    console.log('YT cookie file found.');
+  } else {
+    console.log('No YT cookie found. Running without.')
+  }
+
   // TODO: Will below work locally if we don't run ~/.local/bin/yt-dlp ?
   //       - How can we make it work on both?
   const command = `yt-dlp ${args}${cookieArg}${autoSubsStr} ${url}`;
