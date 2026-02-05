@@ -1,15 +1,25 @@
+import fs from 'fs';
 import { execCmd } from '@/utils/misc';
 
 const SUBS_TEMP_DIR = '/tmp/subs';  // Subtitles extracted from video is put in this directory before the text is cleaned up.
 const SUBS_TEXT_DIR = '/tmp/texts'; // Directory where thee cleaned up (text only) subtitles end up as text files.
 
+// To make yt-dlp work on production environment we need to pass cookie info exported from a logged YouTube/Google
+// account. The IP series used on most production env providers is semi-blocked by YouTube (to prevent scraping).
+const SECRET_YDL_COOKIE_FILE_PATH = '/ydl_cookies.txt';
+
 const getSubTitlesFromVideo = async (url, useAutoSubs) => {
   const autoSubsStr = useAutoSubs ? ' --write-auto-subs' : '';
   const args = `--skip-download --write-subs --sub-langs "en" --output "${SUBS_TEMP_DIR}/%(title)s.%(ext)s"`;
 
+  // Only include cookie arg if cookie file exists. yt-dlp works without cookie file locally and need to be set up
+  // as a "secret file" on production server.
+  const cookieFileExists = fs.existsSync(SECRET_YDL_COOKIE_FILE_PATH);
+  const cookieArg = cookieFileExists ? ` --cookies ${SECRET_YDL_COOKIE_FILE_PATH}` : '';
+
   // TODO: Will below work locally if we don't run ~/.local/bin/yt-dlp ?
   //       - How can we make it work on both?
-  const command = `yt-dlp ${args}${autoSubsStr} ${url}`;
+  const command = `yt-dlp ${args}${cookieArg}${autoSubsStr} ${url}`;
   const stdout = await execCmd(command);
 
   // Seems like there's no good way to check if a "normally" translated language exist before trying to download it.
