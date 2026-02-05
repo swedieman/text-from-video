@@ -15,7 +15,7 @@ const getSubTitlesFromVideo = async (url, useAutoSubs) => {
   // Only include cookie arg if cookie file exists. yt-dlp works without cookie file locally and need to be set up
   // as a "secret file" on production server.
   const cookieFileExists = fs.existsSync(SECRET_YDL_COOKIE_FILE_PATH);
-  const cookieArg = cookieFileExists ? ` --cookies cookies.txt` : '';
+  const cookieArg = cookieFileExists ? ` --cookies ${SECRET_YDL_COOKIE_FILE_PATH}` : '';
 
   if (cookieFileExists) {
     console.log('YT cookie file found.');
